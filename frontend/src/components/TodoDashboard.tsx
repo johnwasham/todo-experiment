@@ -131,12 +131,11 @@ export default function TodoDashboard({ theme, onToggleTheme }: { theme: Theme; 
     setAddError(null)
     setAddLoading(true)
     try {
-      const todo = await createTodo({
+      await createTodo({
         name: newName,
         priority: newPriority,
         due_date: newDueDate || null,
       })
-      setTodos((prev) => [todo, ...prev])
       setNewName('')
       setNewPriority(null)
       setNewDueDate('')

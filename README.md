@@ -60,6 +60,7 @@ bun run dev
 | `bun run build` | Production build |
 | `bun run typecheck` | TypeScript type-check |
 | `bun run preview` | Preview production build |
+| `bun run e2e/todo.mjs` | Run E2E tests (requires both servers running) |
 
 ## API endpoints
 
