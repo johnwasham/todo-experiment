@@ -1,0 +1,4 @@
+pytest
+httpx
+mypy
+sqlalchemy[mypy]

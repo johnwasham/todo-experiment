@@ -1,0 +1,17 @@
+# Python
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+**/*.pyc
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/upstart.db
+
+# Node / Bun
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.idea/
+.venv/
+.mypy_cache/

@@ -1,0 +1,137 @@
+input[type='checkbox'].todo-check {
+  appearance: none;
+  width: 1.2em;
+  height: 1.2em;
+  border: 3px solid #48c78e;
+  border-radius: 3px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+input[type='checkbox'].todo-check:checked {
+  background-color: #48c78e;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.3 4.3a1 1 0 0 0-1.4 0L6 10.2 4.1 8.3a1 1 0 0 0-1.4 1.4l2.6 2.6a1 1 0 0 0 1.4 0l6.6-6.6a1 1 0 0 0 0-1.4z'/%3E%3C/svg%3E");
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ── Dark mode ─────────────────────────────────────────────────────────── */
+
+html, body {
+  min-height: 100%;
+}
+
+html[data-theme='light'],
+html[data-theme='light'] body {
+  background-color: #fff;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+  background-color: #121212;
+}
+
+html[data-theme='dark'] body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+[data-theme='dark'] .section {
+  background-color: #121212;
+}
+
+[data-theme='dark'] .title,
+[data-theme='dark'] .subtitle {
+  color: #e0e0e0;
+}
+
+[data-theme='dark'] .table {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+[data-theme='dark'] .table thead th {
+  color: #aaa;
+  border-bottom-color: #444;
+}
+
+[data-theme='dark'] .table td,
+[data-theme='dark'] .table th {
+  border-color: #333;
+}
+
+[data-theme='dark'] .table.is-hoverable tbody tr:not(.is-selected):hover {
+  background-color: #2a2a2a !important;
+}
+
+[data-theme='dark'] .input,
+[data-theme='dark'] .select select {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+[data-theme='dark'] .input::placeholder {
+  color: #777;
+}
+
+[data-theme='dark'] .input:focus,
+[data-theme='dark'] .select select:focus {
+  border-color: #888;
+  box-shadow: 0 0 0 0.125em rgba(136, 136, 136, 0.25);
+}
+
+[data-theme='dark'] .select::after {
+  border-color: #aaa;
+}
+
+[data-theme='dark'] .button.is-light {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+[data-theme='dark'] .button.is-light:hover {
+  background-color: #333;
+}
+
+[data-theme='dark'] .has-text-grey {
+  color: #888 !important;
+}
+
+[data-theme='dark'] .has-text-grey-light {
+  color: #555 !important;
+}
+
+[data-theme='dark'] .has-background-danger-light {
+  background-color: #4a1a1a !important;
+  color: #ffaaaa !important;
+}
+
+[data-theme='dark'] .has-background-warning-light {
+  background-color: #3a3010 !important;
+  color: #ffe080 !important;
+}
+
+[data-theme='dark'] .has-background-info-light {
+  background-color: #0e2a3a !important;
+  color: #80ccff !important;
+}
+
+[data-theme='dark'] .has-background-success-light {
+  background-color: #0e2e1a !important;
+  color: #80ffaa !important;
+}
+
+[data-theme='dark'] .help.is-danger {
+  color: #ff7070;
+}
+
+[data-theme='dark'] .delete {
+  background-color: #555;
+}
+
+[data-theme='dark'] .delete:hover {
+  background-color: #777;
+}
