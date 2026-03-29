@@ -1,4 +1,4 @@
-# Upstart
+# ToDo List
 
 Full-stack todo list app. React/TypeScript frontend + Python/FastAPI backend. No authentication — publicly accessible.
 

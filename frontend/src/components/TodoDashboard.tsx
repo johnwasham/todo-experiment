@@ -11,6 +11,11 @@ import {
 type SortField = 'created_at' | 'due_date' | 'priority'
 type SortDir = 'asc' | 'desc'
 
+type WsEvent =
+  | { type: 'created'; todo: TodoItem }
+  | { type: 'updated'; todo: TodoItem }
+  | { type: 'deleted'; id: number }
+
 const DATE_FMT = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 const DATETIME_FMT = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' })
 
@@ -69,6 +74,38 @@ export default function TodoDashboard({ theme, onToggleTheme }: { theme: Theme; 
 
   useEffect(() => {
     listTodos().then(setTodos).catch(() => undefined)
+  }, [])
+
+  useEffect(() => {
+    const proto = window.location.protocol === 'https:' ? 'wss' : 'ws'
+    const wsUrl = `${proto}://${window.location.host}/ws`
+    let ws: WebSocket
+    let reconnectTimer: ReturnType<typeof setTimeout>
+    let unmounted = false
+
+    function connect() {
+      ws = new WebSocket(wsUrl)
+      ws.onmessage = (event) => {
+        const msg = JSON.parse(event.data as string) as WsEvent
+        if (msg.type === 'created') {
+          setTodos((prev) => prev.some((t) => t.id === msg.todo.id) ? prev : [msg.todo, ...prev])
+        } else if (msg.type === 'updated') {
+          setTodos((prev) => prev.map((t) => (t.id === msg.todo.id ? msg.todo : t)))
+        } else if (msg.type === 'deleted') {
+          setTodos((prev) => prev.filter((t) => t.id !== msg.id))
+        }
+      }
+      ws.onclose = () => {
+        if (!unmounted) reconnectTimer = setTimeout(connect, 2000)
+      }
+    }
+
+    connect()
+    return () => {
+      unmounted = true
+      clearTimeout(reconnectTimer)
+      ws?.close()
+    }
   }, [])
 
   const sorted = [...todos].sort((a, b) => {

@@ -1,12 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
 from database import Base, engine
 from routers.todos import router as todos_router
+from ws_manager import manager
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Upstart Dev API")
+app = FastAPI(title="To-Do List API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,3 +18,13 @@ app.add_middleware(
 )
 
 app.include_router(todos_router, prefix="/todos", tags=["todos"])
+
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket) -> None:
+    await manager.connect(websocket)
+    try:
+        while True:
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)

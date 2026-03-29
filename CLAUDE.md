@@ -36,7 +36,7 @@ bun run build        # production build
 ### Backend (`backend/`)
 
 - `main.py` — FastAPI app, CORS middleware, mounts router. Also calls `Base.metadata.create_all` on startup to create tables.
-- `database.py` — SQLAlchemy engine (`upstart.db`), `SessionLocal`, `Base`, and the `get_db` FastAPI dependency.
+- `database.py` — SQLAlchemy engine (`todo.db`), `SessionLocal`, `Base`, and the `get_db` FastAPI dependency.
 - `models.py` — SQLAlchemy `TodoItem` ORM model with `Mapped[]` type annotations.
 - `schemas.py` — Pydantic v2 request/response models (`TodoCreate`, `TodoUpdate`, `TodoResponse`).
 - `routers/todos.py` — Routes: `GET /todos`, `POST /todos`, `PATCH /todos/{id}`, `DELETE /todos/{id}`.
